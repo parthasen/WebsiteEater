@@ -1,26 +1,43 @@
+//
+//  WebsiteEater
+//
+//  This software is released subject to licensing conditions as detailed in 
+//  Licence.txt.
+//
+
 import java.awt.*;
 import javax.swing.*;
 
-public class AppController extends JFrame {
+public class AppController {
 	
-    JPanel jpanel = new JPanel();
-    JButton jbutton = new JButton("Launch");	
+	// Properties
 	
-	public AppController()  {
-		this.setTitle("Website Eater");
-	    this.setSize(600, 400);
-	    this.setLocationRelativeTo(null);
-	    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);             
-	    this.setVisible(true);
-	    this.setResizable(false); 
-	    
-	    jpanel.setBackground(Color.WHITE);  
-	    jpanel.add(jbutton);
-	    this.setContentPane(jpanel); 
-	}	
+	private MainFrameController mainFrameController;
+		
+	// Constructors
+	
+	private static class AppControllerHolder {
+		static AppController instance = new AppController();    
+	}
 
-	public static void main(String[] args){  	
-		new AppController();	    
-	}    
+	public static AppController getSharedController() {
+	  return AppControllerHolder.instance;
+	}
+	
+	private AppController() {
+		this.mainFrameController = new MainFrameController();
+	}
+	
+	// Getters / Setters
+	
+	public MainFrameController getMainFrameController() {
+		return this.mainFrameController;
+	}
+  	
+	// Manage frames
+	
+	public void showMainFrame() {
+		this.mainFrameController.showFrame();
+	}
 	
 }
