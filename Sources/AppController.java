@@ -16,12 +16,10 @@ public class AppController {
         
     // Constructors
     
-    private static class AppControllerHolder {
-        static AppController instance = new AppController();    
-    }
+    private static AppController sharedInstance = new AppController();
 
     public static AppController getSharedController() {
-      return AppControllerHolder.instance;
+      return AppController.sharedInstance;
     }
     
     private AppController() {
