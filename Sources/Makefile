@@ -2,7 +2,8 @@
 # Makefile of WebsiteEater
 ###############################################
 
-BUI = ../Build
+SCRIPTS = ../Scripts
+BUILD = ../Build
 
 default: format_for_github newbuild
 
@@ -13,23 +14,24 @@ default: format_for_github newbuild
 newbuild: create_dir clean compile run
     
 create_dir:
-	mkdir -p $(BUI)
+	mkdir -p $(BUILD)
 
 compile: create_dir
-	javac -d $(BUI) *.java
+	javac -d $(BUILD) *.java
 
 run:
-	java -cp $(BUI) WebsiteEater
+	java -cp $(BUILD) WebsiteEater
     
 clean:
-	rm -f $(BUI)/*.class
+	rm -f $(BUILD)/*.class
 
 
 ##############################################
 # Utilities
 ##############################################
 
-format_for_github: soft_tabs
-
-soft_tabs:
-	ls *.* | awk '{print "expand -t 4 ", $0, " > /tmp/e; mv /tmp/e ", $0}' | sh -v
+format_for_github:
+	$(SCRIPTS)/tabsToSoftTabs.sh
+	
+count_lines:
+	$(SCRIPTS)/countLines.sh
