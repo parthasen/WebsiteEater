@@ -44,3 +44,9 @@ $RECYCLE.BIN/
 *.msm
 *.msp
 *.lnk
+
+##############################
+# Eclipse files
+##############################
+.classpath
+.project
