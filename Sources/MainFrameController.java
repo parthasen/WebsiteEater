@@ -10,46 +10,55 @@ import javax.swing.*;
 
 public class MainFrameController {
     
-    // Properties
+    // Properties    
+    JFrame frame = new JFrame();    
+    JPanel panel = new JPanel();	
     
-    JFrame frame = new JFrame();
-    
-    JPanel panel = new JPanel();
-    
-    JButton button = new JButton("North");
+    //Panel for the main Layout
+	JPanel panelNorth = new JPanel();
+	JPanel panelCenter = new JPanel();	
     
     // Contructors
     
     public MainFrameController() {
-        this.setupFrame();
-		this.setupLayout();
+        this.mainSetupFrame();
+		this.mainSetupLayout();
+		//this.panelNorthSetupLayout();
     }
 	
-	private void setupFrame() {
+	private void mainSetupFrame() {
         this.frame.setTitle("Website Eater");
         this.frame.setSize(600, 400);
         this.frame.setLocationRelativeTo(null);
         this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);   
-        this.frame.setResizable(true); 
+        this.frame.setResizable(false);         
         
-        this.panel.setBackground(Color.WHITE);  
-        //this.panel.add(this.button);
+        //Dimension dimMaximumWindowSize = new Dimension(800, 800);
+        //this.frame.setMaximumSize(dimMaximumWindowSize);
+        this.frame.setBackground(Color.WHITE);  
         this.frame.setContentPane(this.panel); 
 	}
 	
-	private void setupLayout() {
-
-		this.frame.setLayout(new BorderLayout());		    
-		JButton buttonNorth = new JButton("North");
-		Dimension dimNorth = new Dimension(600, 100);
-		buttonNorth.setPreferredSize(dimNorth);
-		this.panel.add(buttonNorth, BorderLayout.NORTH);
-		
-		JButton buttonCenter = new JButton("Center");
-		this.panel.add(buttonCenter, BorderLayout.CENTER);
-		
-		
-			
+	private void mainSetupLayout() {
+		this.frame.setLayout(new BorderLayout());
+		Dimension dimPanelNorth = new Dimension(600, 100);
+		panelNorth.setPreferredSize(dimPanelNorth);
+		panelNorth.setBackground(Color.YELLOW);
+		this.panel.add(panelNorth, BorderLayout.NORTH);		
+		panelCenter.setBackground(Color.BLACK);
+		this.panel.add(panelCenter, BorderLayout.CENTER);	
+		this.panel.add(new JPanel(), BorderLayout.EAST);
+		this.panel.add(new JPanel(), BorderLayout.SOUTH);
+		this.panel.add(new JPanel(), BorderLayout.WEST);					
+	}
+	
+	private void panelNorthSetupLayout() {
+		panelNorth.setLayout(new BorderLayout());
+		this.panel.add(new JPanel(), BorderLayout.EAST);
+		this.panel.add(new JPanel(), BorderLayout.SOUTH);
+		this.panel.add(new JPanel(), BorderLayout.WEST);
+		this.panel.add(new JPanel(), BorderLayout.CENTER);
+		this.panel.add(new JPanel(), BorderLayout.NORTH);
 	}
     
     // Getters / Setters
