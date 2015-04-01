@@ -7,123 +7,96 @@
 
 import java.awt.*;
 import javax.swing.*;
+import javax.swing.border.*;
+import java.awt.event.*;
 
 public class MainFrameController {
 
-	// Properties    
-	JFrame frame = new JFrame();    
-	JPanel panel = new JPanel();	
+    // UI elements
+    
+    private JFrame frame = new JFrame();
 
-	//Panel for the main Layout
-	JPanel panelNorth = new JPanel();
-	JPanel panelCenter = new JPanel();	
+    private JPanel panel = new JPanel();
 
-	//Panel for the panelCenter
-	JPanel panelCenterCenter = new JPanel();
+    private PlaceholderTextField websiteUrlField = new PlaceholderTextField();
 
-	//Panel for the north panel
-	JPanel panelNorthCenter = new JPanel();	
+    private PlaceholderTextField outputUrlField = new PlaceholderTextField();
 
-	JPanel panelNorthCenterCenter = new JPanel();		//panel for both text field
-	JPanel panelNorthCenterCenterCenter = new JPanel();	//panel for directory text field
-	JPanel panelNorthCenterCenterNorth = new JPanel();	//panel for url text field
+    private JButton launchButton = new JButton("Launch");
 
-	JPanel panelNorthCenterEast = new JPanel();			//panel for both buttons
-	JPanel panelNorthCenterEastCenter = new JPanel();	//panel for directory button
-	JPanel panelNorthCenterEastNorth = new JPanel();	//panel for launch button
+    private JButton outputButton = new JButton("Output");
+    
+    private JTextArea logTextArea = new JTextArea();
 
-	//Button
-	JButton launch = new JButton("Launch");
-	JButton directoryChooserButton = new JButton("Dir");
+    // Contructors
+    
+    public MainFrameController() {
+        this.setupFrame();
+        this.setupUIElements();
+    }
 
-	// Contructors
-	public MainFrameController() {
-		this.setupMainFrame();
-		this.setupMainLayout();
-	}
+    private void setupFrame() {
+        this.frame.setTitle("Website Eater");
+        this.frame.setSize(600, 500);
+        this.frame.setLocationRelativeTo(null);
+        this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.frame.setResizable(false);
+        this.frame.setBackground(Color.WHITE);
+        this.frame.setContentPane(this.panel);
+    }
 
-	private void setupMainFrame() {
-		this.frame.setTitle("Website Eater");
-		this.frame.setSize(600, 500);
-		this.frame.setLocationRelativeTo(null);
-		this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);   
-		this.frame.setResizable(false); 		
-		this.frame.setBackground(Color.WHITE);  
-		this.frame.setContentPane(this.panel); 
-		//Dimension dimMaximumWindowSize = new Dimension(800, 800);
-		//this.frame.setMaximumSize(dimMaximumWindowSize);
-	}
+    private void setupUIElements() {
+        this.frame.setLayout(null);
+        
+        this.websiteUrlField.setBounds(new Rectangle(4, 10, 520, 22));
+        this.websiteUrlField.setPlaceholder("Website URL");
+        this.frame.add(this.websiteUrlField);
+        
+        ActionPerformer performer = new ActionPerformer(this, "launch");
+        this.launchButton.addActionListener(performer);
+        this.launchButton.setBounds(new Rectangle(530, 10, 60, 22));
+        this.frame.add(this.launchButton);
+        
+        this.outputUrlField.setBounds(new Rectangle(4, 40, 520, 22));
+        this.outputUrlField.setPlaceholder("Output directory path");
+        this.frame.add(this.outputUrlField);
+        
+        performer = new ActionPerformer(this, "chooseOutputFolder");
+        this.outputButton.addActionListener(performer);
+        this.outputButton.setBounds(new Rectangle(530, 40, 60, 22));
+        this.frame.add(this.outputButton);
+        
+        this.logTextArea.setBorder(LineBorder.createBlackLineBorder());
+        this.logTextArea.setBounds(new Rectangle(6, 70, 588, 400));
+        this.logTextArea.setEditable(false);
+        this.logTextArea.append("Nothing to do...");
+        this.frame.add(this.logTextArea);
+    }
 
-	private void setupMainLayout() {
-		this.frame.setLayout(new BorderLayout());
-		Dimension dimPanelNorth = new Dimension(600, 120);
-		panelNorth.setPreferredSize(dimPanelNorth);
-		this.panel.add(panelNorth, BorderLayout.NORTH);	
-		panelCenterCenter.setBorder(BorderFactory.createLineBorder(Color.black));
-		panelCenterCenter.setBackground(Color.WHITE);
-		this.panel.add(panelCenterCenter, BorderLayout.CENTER);	
-		this.panel.add(new JPanel(), BorderLayout.EAST);
-		this.panel.add(new JPanel(), BorderLayout.SOUTH);
-		this.panel.add(new JPanel(), BorderLayout.WEST);	
-		this.setupPanelNorthLayout();
-	}
+    // Getters / Setters
 
-	private void setupPanelNorthLayout() {
-		panelNorth.setLayout(new BorderLayout());
-		panelNorth.add(new JPanel(), BorderLayout.EAST);
-		panelNorth.add(new JPanel(), BorderLayout.NORTH);
-		panelNorth.add(new JPanel(), BorderLayout.SOUTH);
-		panelNorth.add(new JPanel(), BorderLayout.WEST);
-		//panelNorthCenter.setBackground(Color.BLUE);
-		panelNorth.add(panelNorthCenter, BorderLayout.CENTER);
+    public JFrame getFrame() {
+        return this.frame;
+    }
+    
+    // Actions
+    
+    public void launch(ActionEvent e) {
+        System.out.println("LAUNCH");
+    }
+    
+    public void chooseOutputFolder(ActionEvent e) {
+        System.out.println("CHOOSE OUTPUT FOLDER");
+    }
 
-		panelNorthCenter.setLayout(new BorderLayout());			
-		panelNorthCenterEast.setPreferredSize(new Dimension(80, 10));
-		//panelNorthCenterEast.setBackground(Color.GREEN);
-		panelNorthCenter.add(panelNorthCenterEast, BorderLayout.EAST);
-		//panelNorthCenterCenter.setBackground(Color.BLACK);
-		panelNorthCenter.add(panelNorthCenterCenter, BorderLayout.CENTER);
+    // Manage window state
 
-		panelNorthCenterEast.setLayout(new BorderLayout());
-		panelNorthCenterEastNorth.setPreferredSize(new Dimension(0, 50));
-		//panelNorthCenterEastNorth.setBackground(Color.GREEN);
-		panelNorthCenterEast.add(panelNorthCenterEastNorth, BorderLayout.NORTH);
-		launch.setPreferredSize(new Dimension(80, 40));
-		panelNorthCenterEastNorth.add(launch);		
-		panelNorthCenterEast.add(panelNorthCenterEastCenter, BorderLayout.CENTER);
-		directoryChooserButton.setPreferredSize(new Dimension(80, 40));
-		panelNorthCenterEastCenter.add(directoryChooserButton);
+    public void showFrame() {
+        this.frame.setVisible(true);
+    }
 
-		panelNorthCenterCenter.setLayout(new BorderLayout());
-		panelNorthCenterCenterNorth.setPreferredSize(new Dimension(0, 50));
-		//panelNorthCenterEastNorth.setBackground(Color.GREEN);
-		panelNorthCenterCenter.add(panelNorthCenterCenterNorth, BorderLayout.NORTH);
-		JTextField url = new JTextField("URL HERE");
-		url.setPreferredSize(new Dimension(490, 41));
-		panelNorthCenterCenterNorth.add(url);
-
-		panelNorthCenterCenter.add(panelNorthCenterCenterCenter, BorderLayout.CENTER);
-		JTextField directory = new JTextField("DIRECTORY");
-		directory.setPreferredSize(new Dimension(490, 41));
-		panelNorthCenterCenterCenter.add(directory);
-
-	}
-
-
-	// Getters / Setters
-
-	public JFrame getFrame() {
-		return this.frame;
-	}
-
-	// Manage window state
-
-	public void showFrame() {        
-		this.frame.setVisible(true);
-	}
-
-	public void hideFrame() {        
-		this.frame.setVisible(false);
-	}
+    public void hideFrame() {
+        this.frame.setVisible(false);
+    }
 
 }

@@ -9,7 +9,7 @@ import java.awt.*;
 import javax.swing.*;
 
 public class WebsiteEater {
-    
+ 
     public static void main(String[] args) {
         if (args.length == 0) {
             AppController.getSharedController().showMainFrame();
@@ -17,8 +17,9 @@ public class WebsiteEater {
             executeCommandLine(args);
         }
     }    
-    
+
     public static void executeCommandLine(String[] args) {
         System.out.println("Command line interface is not yet supported");
     }
+
 }
