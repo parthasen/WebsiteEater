@@ -2,7 +2,7 @@
 
 ## About the project
 
-WebsiteEater is an application written in Java to simply download website contents.
+WebsiteEater is an application written in Java to simply download website contents.It is an amazing website for downloding purpose
 
 The project is is currently under development and was not tested on all platforms. Moreover, the main purpose of this project is to learn Java programming langage. That's why the code should not be perfect and will undergo many refactorings.
 
